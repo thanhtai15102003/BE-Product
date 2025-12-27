@@ -43,3 +43,11 @@
     padding: 6px 10px;
     border-bottom: 1px solid #515151;
 }
+
+.card-header {
+    padding: 8px 12px;          /* nhỏ lại */
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #f8f9fa;  /* xám nhạt */
+    border-bottom: 1px solid #e5e5e5;
+}
