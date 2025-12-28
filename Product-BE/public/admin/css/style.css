@@ -51,3 +51,111 @@
     background-color: #f8f9fa;  /* xám nhạt */
     border-bottom: 1px solid #e5e5e5;
 }
+
+
+/* css phần bộ lọc và tìm kiếm */
+
+/* Card */
+.card-header {
+    padding: 14px 20px;
+    font-weight: 600;
+    font-size: 16px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Row cân giữa */
+.card-body .row {
+    display: flex;
+    align-items: center;
+}
+
+/* Cột trái – filter */
+.card-body .col-6:first-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Button filter */
+.card-body .btn-outline-success {
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid #22c55e;
+    color: #16a34a;
+    background: #fff;
+    transition: all 0.25s ease;
+}
+
+.card-body .btn-outline-success:hover,
+.card-body .btn-outline-success.active {
+    background: #22c55e;
+    color: #fff;
+}
+
+/* Cột phải – search */
+.card-body .col-6:last-child {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Input group */
+#form-search {
+    display: flex;
+}
+
+#form-search .form-control {
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 999px 0 0 999px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    outline: none;
+}
+
+#form-search .form-control:focus {
+    border-color: #22c55e;
+}
+
+/* Button search */
+#form-search .btn-success {
+    height: 36px;
+    padding: 0 18px;
+    border-radius: 0 999px 999px 0;
+    border: none;
+    background: #22c55e;
+    font-weight: 500;
+    transition: background 0.25s;
+}
+
+#form-search .btn-success:hover {
+    background: #16a34a;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .card-body .row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .card-body .col-6 {
+        width: 100%;
+        justify-content: flex-start !important;
+    }
+
+    #form-search {
+        width: 100%;
+    }
+
+    #form-search .form-control {
+        flex: 1;
+    }
+}
+/* End css phần bộ lọc và tìm kiếm */
