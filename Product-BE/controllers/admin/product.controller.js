@@ -5,7 +5,7 @@ const paginationHelper = require('../../helpers/pagination');
 
 // [GET] /admin/products
 
-module.exports.index = async (req, res) => { 
+module.exports.index = async (req, res) => {
     const filterStatus = filterStatusHelper(req.query);
     let find = {
         deleted: false
@@ -23,14 +23,16 @@ module.exports.index = async (req, res) => {
     const countProducts = await Product.countDocuments(find);
     let objectPagination = paginationHelper(
         {
-        limitItem: 4,
-        currentPage: 1
+            limitItem: 4,
+            currentPage: 1
         },
         req.query,
         countProducts
-    )
+    );
 
-    const products = await Product.find(find).limit(objectPagination.limitItem).skip(objectPagination.skip);;
+    const products = await Product.find(find)
+        .limit(objectPagination.limitItem)
+        .skip(objectPagination.skip);
 
     res.render('admin/pages/products/index', {
         pageTitle: 'Danh sách sản phẩm',
@@ -39,4 +41,18 @@ module.exports.index = async (req, res) => {
         keyword: objectSearch.keyword,
         pagination: objectPagination
     });
+};
+
+// [PATCH] /admin/products/change-status/:status/:id
+module.exports.changeStatus = async (req, res) => {
+    const status = req.params.status;
+    const id = req.params.id;
+
+    await Product.updateOne({ _id: id }, { status: status });
+    const referer = req.get('Referer');
+    const fallback =
+        (req.app && req.app.locals && req.app.locals.prefixAdmin
+            ? req.app.locals.prefixAdmin
+            : '') + '/products';
+    res.redirect(referer || fallback);
 };
