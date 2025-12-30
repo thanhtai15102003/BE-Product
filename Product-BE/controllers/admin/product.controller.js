@@ -4,7 +4,6 @@ const searchHelper = require('../../helpers/search');
 const paginationHelper = require('../../helpers/pagination');
 
 // [GET] /admin/products
-
 module.exports.index = async (req, res) => {
     const filterStatus = filterStatusHelper(req.query);
     let find = {
@@ -80,3 +79,16 @@ module.exports.changeMulti = async (req, res) => {
             : '') + '/products';
     res.redirect(referer || fallback);
 };
+
+// [DELETE] /admin/products/delete/:id
+module.exports.deleteItem = async (req, res) => {
+    const id = req.params.id;
+    await Product.deleteOne({ _id: id });
+    
+    const referer = req.get('Referer');
+    const fallback =
+        (req.app && req.app.locals && req.app.locals.prefixAdmin
+            ? req.app.locals.prefixAdmin
+            : '') + '/products';
+    res.redirect(referer || fallback);
+}

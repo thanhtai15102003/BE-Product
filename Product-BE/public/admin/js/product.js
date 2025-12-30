@@ -62,17 +62,40 @@ if (formChangeMulti) {
 
         if (inuptChecked.length > 0) {
             let ids = [];
-            const inputIds = formChangeMulti.querySelector("input[name='ids']")
+            const inputIds = formChangeMulti.querySelector("input[name='ids']");
 
             inuptChecked.forEach((input) => {
                 const id = input.value;
                 ids.push(id);
-            })
+            });
             inputIds.value = ids.join(', ');
             formChangeMulti.submit();
         } else {
             alert('Vui lòng chọn sản phẩm');
         }
-    })
+    });
 }
 // End Form Change Multi
+
+// Delete Item
+const buttonDelete = document.querySelectorAll('[button-delete]');
+if (buttonDelete.length > 0) {
+    buttonDelete.forEach((button) => {
+        const formDeleteItem = document.querySelector('#form-delete-item');
+        const path = formDeleteItem.getAttribute('data-path');
+
+        button.addEventListener('click', () => {
+            const isConfirm = confirm('Bạn có chắc chắn muốn xóa không?');
+
+            if (isConfirm) {
+                const id = button.getAttribute('data-id');
+
+                const action = `${path}/${id}?_method=DELETE`;
+                formDeleteItem.action = action;
+                formDeleteItem.submit();
+                
+            }
+        });
+    });
+}
+// End Delete Item
