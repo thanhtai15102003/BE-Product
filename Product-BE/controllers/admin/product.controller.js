@@ -62,11 +62,11 @@ module.exports.changeMulti = async (req, res) => {
     const ids = req.body.ids.split(', ');
 
     switch (type) {
-        case "active":
-            await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
+        case 'active':
+            await Product.updateMany({ _id: { $in: ids } }, { status: 'active' });
             break;
-        case "inactive":
-            await Product.updateMany({ _id: { $in: ids } }, { status: "inactive" });
+        case 'inactive':
+            await Product.updateMany({ _id: { $in: ids } }, { status: 'inactive' });
             break;
         default:
             break;
@@ -83,12 +83,17 @@ module.exports.changeMulti = async (req, res) => {
 // [DELETE] /admin/products/delete/:id
 module.exports.deleteItem = async (req, res) => {
     const id = req.params.id;
-    await Product.deleteOne({ _id: id });
-    
+    // await Product.deleteOne({ _id: id }); delete vĩnh viễn
+    await Product.updateOne({ _id: id },
+        {
+            deleted: true,
+            deleteAt: new Date()
+        });
+
     const referer = req.get('Referer');
     const fallback =
         (req.app && req.app.locals && req.app.locals.prefixAdmin
             ? req.app.locals.prefixAdmin
             : '') + '/products';
     res.redirect(referer || fallback);
-}
+};
