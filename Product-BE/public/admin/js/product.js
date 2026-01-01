@@ -60,6 +60,15 @@ if (formChangeMulti) {
         const checkBoxMulti = document.querySelector('[checkbox-multi]');
         const inuptChecked = checkBoxMulti.querySelectorAll("input[name='id']:checked");
 
+        const typeChange = e.target.elements.type.value;
+        if (typeChange == 'deleteAll') {
+            const isConfirm = confirm('Bạn có chắc chắn muốn xóa không?');
+
+            if (!isConfirm) {
+                return;
+            }
+        }
+
         if (inuptChecked.length > 0) {
             let ids = [];
             const inputIds = formChangeMulti.querySelector("input[name='ids']");
@@ -93,7 +102,6 @@ if (buttonDelete.length > 0) {
                 const action = `${path}/${id}?_method=DELETE`;
                 formDeleteItem.action = action;
                 formDeleteItem.submit();
-                
             }
         });
     });
