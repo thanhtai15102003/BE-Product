@@ -49,6 +49,9 @@ module.exports.changeStatus = async (req, res) => {
     const id = req.params.id;
 
     await Product.updateOne({ _id: id }, { status: status });
+
+    req.flash("success", "Cập nhật thành công")
+
     const referer = req.get('Referer');
     const fallback =
         (req.app && req.app.locals && req.app.locals.prefixAdmin
@@ -65,9 +68,11 @@ module.exports.changeMulti = async (req, res) => {
     switch (type) {
         case 'active':
             await Product.updateMany({ _id: { $in: ids } }, { status: 'active' });
+            req.flash('success', `Cập nhật thành công ${ids.length} sản phẩm`);
             break;
         case 'inactive':
             await Product.updateMany({ _id: { $in: ids } }, { status: 'inactive' });
+             req.flash('success', `Cập nhật thành công ${ids.length} sản phẩm`);
             break;
         case 'deleteAll':
             await Product.updateMany(
