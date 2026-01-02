@@ -30,6 +30,7 @@ module.exports.index = async (req, res) => {
     );
 
     const products = await Product.find(find)
+        .sort({ position: "desc" })
         .limit(objectPagination.limitItem)
         .skip(objectPagination.skip);
 
@@ -74,6 +75,13 @@ module.exports.changeMulti = async (req, res) => {
                 { deleted: true, deleteAt: new Date() }
             );
             break;
+        case 'changePosition':
+            for (const item of ids) {
+                let [id, position] = item.split('-');
+                position = parseInt(position);
+                await Product.updateOne({ _id: id }, { position: position });
+            }
+            break;
         default:
             break;
     }
@@ -90,11 +98,13 @@ module.exports.changeMulti = async (req, res) => {
 module.exports.deleteItem = async (req, res) => {
     const id = req.params.id;
     // await Product.deleteOne({ _id: id }); delete vĩnh viễn
-    await Product.updateOne({ _id: id },
+    await Product.updateOne(
+        { _id: id },
         {
             deleted: true,
             deleteAt: new Date()
-        });
+        }
+    );
 
     const referer = req.get('Referer');
     const fallback =
