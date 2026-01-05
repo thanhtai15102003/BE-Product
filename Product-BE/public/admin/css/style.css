@@ -197,3 +197,16 @@
 }
 /* End Show alert */
 
+/* Image Preview Upload */
+.image-prev {
+    width: 150px;
+    height: auto;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+}
+.image-prev[src=""] {
+    display: none;
+}
+/* Image Preview Upload */

@@ -17,9 +17,10 @@ block main
         div(class="form-group")
             label(for="stock") Số lượng kho
             input(type="number" class="form-control" id="stock" name="stock" value="0" min="0")
-        div(class="form-group")
+        div(class="form-group" upload-image)
             label(for="thumbnail") Hình ảnh
-            input(type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*")
+            input(type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*" upload-image-input)
+            img(src="" upload-image-preview class="image-prev")
         div(class="form-group")
             label(for="position") Vị trí
             input(type="number" class="form-control" id="position" name="position" placeholder="Tự động tăng" min="1")
