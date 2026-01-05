@@ -1,7 +1,7 @@
 extends ../../layouts/default.pug
 block main
     h1 Thêm mới sản phẩm
-    form(action=`${prefixAdmin}/products/create` method="POST" id="form-create-product")
+    form(action=`${prefixAdmin}/products/create` method="POST" id="form-create-product" enctype="multipart/form-data")
         div(class="form-group")
             label(for="title") Tiêu đề
             input(type="text" class="form-control" id="title" name="title" required)
@@ -19,7 +19,7 @@ block main
             input(type="number" class="form-control" id="stock" name="stock" value="0" min="0")
         div(class="form-group")
             label(for="thumbnail") Hình ảnh
-            input(type="text" class="form-control" id="thumbnail" name="thumbnail")
+            input(type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*")
         div(class="form-group")
             label(for="position") Vị trí
             input(type="number" class="form-control" id="position" name="position" placeholder="Tự động tăng" min="1")
