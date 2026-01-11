@@ -15,3 +15,21 @@ mixin alert-error(time)
                 show-alert
                 data-time=time
             ) #{messages.error} <span close-alert>x</span>
+
+mixin alert-NotExit(time)
+    - if (messages.NotExit)
+        .messages.info 
+            div(
+                class="alert alert-danger"
+                show-alert
+                data-time=time
+            ) #{messages.NotExit} <span close-alert>x</span>
+
+mixin alert-updateSuccess(time)
+    - if (messages.updateSuccess)
+        .messages.info 
+            div(
+                class="alert alert-success"
+                show-alert
+                data-time=time
+            ) #{messages.updateSuccess} <span close-alert>x</span>
