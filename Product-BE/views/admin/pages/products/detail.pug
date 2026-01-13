@@ -1,0 +1,40 @@
+extends ../../layouts/default.pug
+
+block main
+  .product-detail
+    .product-card
+      .product-left
+        img(src=product.thumbnail alt=product.title)
+
+      .product-right
+        h1.product-title= product.title
+
+        .product-meta
+          span SKU: #{product._id}
+          span Cập nhật: #{product.updatedAt.toLocaleDateString()}
+
+        .product-status
+          if product.status === 'active'
+            span.badge.active ACTIVE
+          else
+            span.badge.inactive INACTIVE
+
+        p.product-desc= product.description
+
+        .price-box
+          if product.discountPercentage > 0
+            span.old-price $#{product.price}
+            span.new-price
+              | $#{(product.price - (product.price * product.discountPercentage / 100)).toFixed(2)}
+            span.discount -#{product.discountPercentage}%
+          else
+            span.new-price $#{product.price}
+
+        .stock(class=product.stock > 0 ? 'in-stock' : 'out-stock')
+          if product.stock > 0
+            | Còn #{product.stock} sản phẩm
+          else
+            | Hết hàng
+    .actions
+        a.btn.btn-edit(href=`${prefixAdmin}/products/edit/${product._id}`) Chỉnh sửa sản phẩm
+    script(src="/admin/js/product.js")
