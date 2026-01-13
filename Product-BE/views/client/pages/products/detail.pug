@@ -1,0 +1,33 @@
+extends ../../layouts/default.pug
+
+block main
+  .container.mt-4
+    .product-client
+      .row
+        .col-md-5
+          img.product-image(src=product.thumbnail alt=product.title)
+
+        .col-md-7
+          h1.product-title= product.title
+
+          .product-badges
+            if product.discountPercentage > 0
+              span.badge-sale -#{product.discountPercentage}%
+
+          .product-price
+            if product.discountPercentage > 0
+              span.old-price $#{product.price}
+              span.new-price
+                | $#{(product.price - (product.price * product.discountPercentage / 100)).toFixed(2)}
+            else
+              span.new-price $#{product.price}
+
+          p.product-desc= product.description
+
+          .product-stock
+            if product.stock > 0
+              | Còn #{product.stock} sản phẩm
+            else
+              | Hết hàng
+
+          button.btn-add Thêm vào giỏ hàng

@@ -359,9 +359,39 @@
 }
 
 .actions {
-  margin-top: 25px;
+  margin-top: 28px;
+  display: flex;
+  gap: 14px;
 }
 
+/* Back button */
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 20px;
+  background: #f5f7fa;
+  color: #555;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #dcdfe6;
+  transition: all .25s ease;
+}
+
+.btn-back::before {
+  content: "←";
+  font-size: 16px;
+}
+
+.btn-back:hover {
+  background: #fff;
+  color: #333;
+  border-color: #b0bec5;
+  transform: translateY(-2px);
+}
+
+/* Edit button giữ nguyên */
 .btn-edit {
   display: inline-flex;
   align-items: center;

@@ -36,5 +36,7 @@ block main
           else
             | Hết hàng
     .actions
-        a.btn.btn-edit(href=`${prefixAdmin}/products/edit/${product._id}`) Chỉnh sửa sản phẩm
+        a.btn-back(href=`${prefixAdmin}/products`) ← Quay lại danh sách
+        a.btn-edit(href=`${prefixAdmin}/products/edit/${product._id}`) ✎ Chỉnh sửa sản phẩm
+
     script(src="/admin/js/product.js")
