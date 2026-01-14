@@ -26,10 +26,10 @@ app.use(session({ cookie: { maxAge: 60000 } }));
 app.use(flash());
 // End Flash
 
-app.set('views', `${__dirname}/views`);
+app.set('views', path.join(process.cwd(), 'views'));
 app.set('view engine', 'pug');
 
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(path.join(process.cwd(), 'public')));
 
 //App locals Variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
@@ -37,6 +37,4 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin;
 route(app);
 routeAdmin(app);
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
-});
+module.exports = app;
